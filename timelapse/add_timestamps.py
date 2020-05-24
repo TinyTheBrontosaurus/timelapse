@@ -114,7 +114,7 @@ def main(argv):
                     # Round to 10 minutes
                     resolution = 60 * 10
                     timestamp = datetime.datetime.fromtimestamp(timestamp.timestamp() // resolution * resolution)
-                    draw.text((height * 0.05, width * 0.2),
+                    draw.text((width * 0.05, height * 0.2),
                               f'{timestamp.strftime("%#I:%M")}'
                               f'{"a" if timestamp.hour < 12 else "p"}',
                               font=font)
@@ -122,9 +122,6 @@ def main(argv):
                     # Add to video
                     writer.append_data(np.array(img))
                     progress_bar.update()
-
-                    if framei >= 20:
-                        break
 
 
 if __name__ == "__main__":

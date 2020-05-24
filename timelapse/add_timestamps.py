@@ -8,6 +8,7 @@ import imageio_ffmpeg
 from PIL import Image, ImageDraw, ImageFont
 import tqdm
 import numpy as np
+from loguru import logger
 
 
 @dataclass
@@ -92,6 +93,12 @@ def main(argv):
 
     rotations = {None: 0, "right": 3, "flip": 2, "left": 1}[args.rotate]
     font = ImageFont.truetype('arial', 180)
+
+    if output_filename.exists():
+        if overwrite_output:
+            logger.warning(f"Overwriting {output_filename}")
+        else:
+            raise FileExistsError(f"Output file already exists {output_filename}")
 
 
     with tqdm.tqdm(smoothing=0, unit='frame', total=time_converter.frame_count) as progress_bar:

@@ -39,12 +39,13 @@ class TimeConverter:
         return self.end_time - self.duration_real
 
     def time_at_frame(self, frame) -> datetime.datetime:
-        return self.start_time + datetime.timedelta(seconds=self.fps_real * frame)
+        return self.start_time + datetime.timedelta(seconds=self.spf_real * frame)
 
     @property
     def duration_real(self) -> datetime.timedelta:
         return datetime.timedelta(seconds=self.frame_count / self.fps_real)
 
+    @property
     def duration_video(self) -> datetime.timedelta:
         return datetime.timedelta(seconds=self.frame_count / self.fps_video)
 
